@@ -46,8 +46,8 @@ export function Footer() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="#diagnostico" className="hover:text-white transition-colors">
-                  O que aconteceu com seu celular?
+                <a href="#servicos" className="hover:text-white transition-colors">
+                  Serviços e reparos
                 </a>
               </li>
               <li>

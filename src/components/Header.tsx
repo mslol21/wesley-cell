@@ -27,8 +27,7 @@ export function Header() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: "Diagnóstico", href: "#diagnostico" },
-    { label: "Serviços", href: "#servicos" },
+    { label: "Serviços & Reparos", href: "#servicos" },
     { label: "Como Funciona", href: "#processo" },
     { label: "Localização", href: "#localizacao" },
     { label: "Dúvidas", href: "#duvidas" },

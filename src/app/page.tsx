@@ -1,8 +1,7 @@
 import React from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { ProblemsSelector } from "@/components/ProblemsSelector";
-import { ServicesEditorial } from "@/components/ServicesEditorial";
+import { ServicesHub } from "@/components/ServicesHub";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { LocationSection } from "@/components/LocationSection";
 import { FAQSection } from "@/components/FAQSection";
@@ -12,13 +11,12 @@ import { MobileActionBar } from "@/components/MobileActionBar";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0b0f19] text-[#f1f5f9]">
+    <div className="min-h-screen flex flex-col bg-[#080d1a] text-[#f8fafc]">
       <Header />
 
       <main className="flex-1 pb-16 md:pb-0">
         <Hero />
-        <ProblemsSelector />
-        <ServicesEditorial />
+        <ServicesHub />
         <ProcessTimeline />
         <LocationSection />
         <FAQSection />
