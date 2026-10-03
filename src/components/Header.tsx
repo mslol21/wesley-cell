@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { MessageSquare, Phone, Menu, X, MapPin, Wrench } from "lucide-react";
+import Image from "next/image";
+import { MessageSquare, Phone, Menu, X, MapPin } from "lucide-react";
 import { SITE_CONFIG, getWhatsAppUrl } from "@/config/site";
 import { Button } from "./ui/Button";
 
@@ -38,15 +39,15 @@ export function Header() {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-150 ${
           scrolled
-            ? "bg-[#0b0f19]/95 backdrop-blur-md border-b border-[var(--border)] shadow-sm"
-            : "bg-[#0b0f19] border-b border-[var(--border)]"
+            ? "bg-[#080d1a]/95 backdrop-blur-md border-b border-[var(--border)] shadow-md"
+            : "bg-[#080d1a] border-b border-[var(--border)]"
         }`}
       >
-        {/* Top announcement bar: Exact physical address */}
+        {/* Top location bar */}
         <div className="bg-[var(--surface)] border-b border-[var(--border)] px-4 py-1.5 text-[11px] sm:text-xs text-[var(--foreground-muted)]">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
+              <MapPin className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0" />
               <span>
                 <strong className="text-[var(--foreground)] font-medium">
                   {SITE_CONFIG.address.street}
@@ -66,7 +67,7 @@ export function Header() {
               <span className="text-[var(--border-strong)]">|</span>
               <a
                 href={`tel:${SITE_CONFIG.phoneRaw}`}
-                className="hover:text-white transition-colors"
+                className="hover:text-white transition-colors font-medium text-[var(--foreground)]"
               >
                 {SITE_CONFIG.phoneDisplay}
               </a>
@@ -74,50 +75,65 @@ export function Header() {
           </div>
         </div>
 
-        {/* Main Navigation Bar */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          {/* Logo & Brand Identity */}
+        {/* Main Header */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+          {/* Logo & Brand Identity with real logo image */}
           <a
             href="#"
-            className="flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-[var(--border-focus)] rounded-sm"
+            className="flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-[var(--border-focus)] rounded-sm group"
           >
-            <div className="w-8 h-8 rounded-[var(--radius-sm)] bg-[var(--surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--primary)]">
-              <Wrench className="w-4 h-4" />
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 shrink-0">
+              <Image
+                src="/logo-circle.png"
+                alt="Wesley Cell Logo"
+                fill
+                sizes="(max-width: 640px) 40px, 48px"
+                className="object-contain"
+                priority
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-base sm:text-lg font-bold tracking-tight text-[var(--foreground)]">
+                <span className="text-base sm:text-xl font-bold tracking-tight text-white group-hover:text-[var(--primary-light)] transition-colors">
                   WESLEY CELL
                 </span>
               </div>
-              <p className="text-[10px] sm:text-[11px] text-[var(--foreground-muted)] uppercase tracking-wider">
-                Celulares e Tablets
+              <p className="text-[10px] sm:text-[11px] text-[var(--foreground-muted)] uppercase tracking-wider font-medium">
+                Soluções em Celulares e Tablets
               </p>
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-xs font-medium uppercase tracking-wider text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors py-2"
+                className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground-muted)] hover:text-white transition-colors py-2"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Direct conversion actions */}
+          {/* Action CTAs */}
           <div className="hidden sm:flex items-center gap-3">
+            <a
+              href={`tel:${SITE_CONFIG.phoneRaw}`}
+              className="text-xs text-[var(--foreground-muted)] hover:text-white flex items-center gap-1.5 px-3 py-2 rounded-md hover:bg-[var(--surface)] transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5 text-[var(--primary-light)]" />
+              <span>{SITE_CONFIG.phoneDisplay}</span>
+            </a>
+
             <a
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Pedir orçamento no WhatsApp"
             >
-              <Button variant="whatsapp" size="sm" className="h-9 px-4 text-xs font-semibold">
+              <Button variant="whatsapp" size="sm" className="h-10 px-4 text-xs font-semibold shadow-sm">
                 <MessageSquare className="w-3.5 h-3.5 mr-1.5" />
                 Pedir Orçamento
               </Button>
@@ -132,7 +148,7 @@ export function Header() {
               rel="noopener noreferrer"
               className="sm:hidden"
             >
-              <Button variant="whatsapp" size="sm" className="h-8 px-3 text-xs">
+              <Button variant="whatsapp" size="sm" className="h-9 px-3 text-xs">
                 <MessageSquare className="w-3.5 h-3.5 mr-1" />
                 Orçamento
               </Button>
@@ -151,20 +167,31 @@ export function Header() {
         </div>
       </header>
 
-      {/* Accessible Mobile Drawer */}
+      {/* Accessible Mobile Menu */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 z-50 lg:hidden flex flex-col bg-[#0b0f19] text-[var(--foreground)]"
+          className="fixed inset-0 z-50 lg:hidden flex flex-col bg-[#080d1a] text-[var(--foreground)]"
           role="dialog"
           aria-modal="true"
-          aria-label="Menu de navegação"
+          aria-label="Menu principal"
         >
-          <div className="flex items-center justify-between px-4 h-14 border-b border-[var(--border)]">
-            <span className="font-bold text-sm tracking-tight">WESLEY CELL</span>
+          <div className="flex items-center justify-between px-4 h-16 border-b border-[var(--border)]">
+            <div className="flex items-center gap-2.5">
+              <div className="relative w-8 h-8 shrink-0">
+                <Image
+                  src="/logo-circle.png"
+                  alt="Wesley Cell Logo"
+                  fill
+                  sizes="32px"
+                  className="object-contain"
+                />
+              </div>
+              <span className="font-bold text-base tracking-tight text-white">WESLEY CELL</span>
+            </div>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-8 h-8 flex items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] text-[var(--foreground)]"
+              className="w-9 h-9 flex items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] text-[var(--foreground)]"
               aria-label="Fechar menu"
             >
               <X className="w-4 h-4" />
@@ -178,7 +205,7 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-base font-medium py-3 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors"
+                  className="text-base font-semibold py-3.5 text-white hover:text-[var(--primary-light)] transition-colors"
                 >
                   {link.label}
                 </a>
@@ -188,11 +215,11 @@ export function Header() {
             <div className="pt-6 border-t border-[var(--border)] space-y-4">
               <div className="text-xs text-[var(--foreground-muted)] space-y-1.5">
                 <p className="flex items-start gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-[var(--primary)] shrink-0 mt-0.5" />
+                  <MapPin className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0 mt-0.5" />
                   <span>{SITE_CONFIG.address.full}</span>
                 </p>
                 <p className="flex items-center gap-1.5">
-                  <Phone className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
+                  <Phone className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0" />
                   <span>{SITE_CONFIG.phoneDisplay}</span>
                 </p>
               </div>
@@ -203,7 +230,7 @@ export function Header() {
                 rel="noopener noreferrer"
                 className="block w-full"
               >
-                <Button variant="whatsapp" size="lg" className="w-full justify-center">
+                <Button variant="whatsapp" size="lg" className="w-full justify-center font-semibold">
                   <MessageSquare className="w-4 h-4 mr-2" />
                   Chamar no WhatsApp
                 </Button>

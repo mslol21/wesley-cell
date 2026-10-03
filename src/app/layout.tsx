@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#0b0f19",
+  themeColor: "#080d1a",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -23,6 +23,10 @@ export const metadata: Metadata = {
   title: "Wesley Cell | Assistência Técnica de Celulares e Tablets • Zona Leste",
   description:
     "Conserto de celulares e tablets na Rua Inácio Monteiro, 762, Zona Leste de São Paulo. Troca de tela, bateria, conector, placa e tampa de iPhone. Peça seu orçamento pelo WhatsApp: (11) 94889-6283.",
+  icons: {
+    icon: "/logo-circle.png",
+    apple: "/logo-circle.png",
+  },
   keywords: [
     "Wesley Cell",
     "assistência técnica celular zona leste",
@@ -52,7 +56,7 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#0b0f19] text-[#f1f5f9] font-sans">
+      <body className="min-h-full flex flex-col bg-[#080d1a] text-[#f8fafc] font-sans">
         {children}
       </body>
     </html>

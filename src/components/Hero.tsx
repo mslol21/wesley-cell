@@ -1,25 +1,26 @@
 import React from "react";
-import { MessageSquare, ArrowDown, MapPin, Wrench, Shield, Check } from "lucide-react";
+import Image from "next/image";
+import { MessageSquare, ArrowDown, MapPin, Check, ShieldCheck, Sparkles } from "lucide-react";
 import { SITE_CONFIG, getWhatsAppUrl } from "@/config/site";
 import { Button } from "./ui/Button";
 
 export function Hero() {
   return (
-    <section className="relative pt-6 pb-12 sm:pt-10 sm:pb-16 lg:pt-14 lg:pb-20 border-b border-[var(--border)]">
+    <section className="relative pt-6 pb-12 sm:pt-10 sm:pb-16 lg:pt-14 lg:pb-20 border-b border-[var(--border)] overflow-hidden bg-tech-pattern">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Immediate clarity and fast conversion */}
+          {/* Left Column: Immediate conversion & clarity */}
           <div className="lg:col-span-7 flex flex-col text-left">
             {/* Eyebrow */}
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[var(--primary)]" />
-              <span className="text-xs font-semibold tracking-wider uppercase text-[var(--foreground-muted)]">
+            <div className="inline-flex items-center gap-2 mb-3 self-start px-2.5 py-1 rounded-[var(--radius-sm)] bg-[var(--primary)]/10 border border-[var(--primary)]/20">
+              <span className="w-2 h-2 rounded-full bg-[var(--primary-light)] animate-pulse" />
+              <span className="text-xs font-semibold tracking-wider uppercase text-[var(--primary-light)]">
                 {SITE_CONFIG.tagline}
               </span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[var(--foreground)] leading-[1.12]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12]">
               {SITE_CONFIG.headline}
             </h1>
 
@@ -28,19 +29,20 @@ export function Hero() {
               {SITE_CONFIG.subheadline}
             </p>
 
-            {/* Location & Quick Context Tag */}
-            <div className="mt-4 flex items-center gap-2 text-xs text-[var(--foreground-muted)]">
-              <MapPin className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
+            {/* Location Badge */}
+            <div className="mt-4 flex items-center gap-2 text-xs sm:text-sm text-[var(--foreground-muted)]">
+              <MapPin className="w-4 h-4 text-[var(--primary-light)] shrink-0" />
               <span>
                 Atendimento no balcão:{" "}
-                <strong className="text-[var(--foreground)] font-medium">
+                <strong className="text-white font-semibold">
                   {SITE_CONFIG.address.street}
-                </strong>
+                </strong>{" "}
+                (Zona Leste)
               </span>
             </div>
 
             {/* Action Buttons */}
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 href={getWhatsAppUrl("Olá! Encontrei a Wesley Cell pelo site e gostaria de solicitar um orçamento.")}
                 target="_blank"
@@ -50,7 +52,7 @@ export function Hero() {
                 <Button
                   variant="whatsapp"
                   size="lg"
-                  className="w-full sm:w-auto justify-center text-sm sm:text-base font-semibold h-12 px-6"
+                  className="w-full sm:w-auto justify-center text-sm sm:text-base font-semibold h-12 px-6 shadow-md"
                 >
                   <MessageSquare className="w-4 h-4 mr-2" />
                   PEDIR ORÇAMENTO
@@ -61,7 +63,7 @@ export function Hero() {
                 <Button
                   variant="secondary"
                   size="lg"
-                  className="w-full sm:w-auto justify-center text-sm h-12 px-5"
+                  className="w-full sm:w-auto justify-center text-sm h-12 px-5 font-semibold"
                 >
                   <ArrowDown className="w-4 h-4 mr-2" />
                   VER SERVIÇOS
@@ -69,90 +71,92 @@ export function Hero() {
               </a>
             </div>
 
-            {/* Fast Trust Cues (Authentic, not fictitious) */}
+            {/* Fast Trust Cues */}
             <div className="mt-8 pt-5 border-t border-[var(--border)] grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs text-[var(--foreground-muted)]">
               <div className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
-                <span>Orçamento sem enrolação</span>
+                <Check className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0" />
+                <span>Orçamento direto e sem enrolação</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
+                <Check className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0" />
                 <span>Celulares e Tablets</span>
               </div>
               <div className="flex items-center gap-1.5 col-span-2 sm:col-span-1">
-                <Check className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
+                <Check className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0" />
                 <span>Loja física na Zona Leste</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Editorial Technical Workshop Frame */}
+          {/* Right Column: Official Wesley Cell Visual Badge & Workshop Card */}
           <div className="lg:col-span-5 w-full">
-            <div className="rounded-[var(--radius-md)] border border-[var(--border-strong)] bg-[var(--surface)] overflow-hidden">
-              {/* Technical Frame Top */}
-              <div className="px-4 py-2.5 bg-[var(--surface-elevated)] border-b border-[var(--border)] flex items-center justify-between text-xs">
+            <div className="relative rounded-[var(--radius-md)] border border-[var(--border-strong)] bg-gradient-to-b from-[#0f1b34] to-[#0a1224] overflow-hidden shadow-xl">
+              {/* Card top bar */}
+              <div className="px-5 py-3 border-b border-[var(--border)] bg-[#0d162a]/90 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Wrench className="w-3.5 h-3.5 text-[var(--primary)]" />
-                  <span className="font-semibold text-[var(--foreground)] uppercase tracking-wider text-[11px]">
-                    Bancada de Reparo • Wesley Cell
+                  <span className="w-2 h-2 rounded-full bg-[var(--primary-light)]" />
+                  <span className="text-xs font-semibold text-white uppercase tracking-wider">
+                    Identidade Oficial Wesley Cell
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-[var(--foreground-dim)] uppercase">
-                  Zona Leste, SP
+                <span className="text-[10px] font-mono text-[var(--primary-light)] uppercase tracking-wider">
+                  Bancada Especializada
                 </span>
               </div>
 
-              {/* Technical Bench Presentation */}
-              <div className="p-5 sm:p-6 bg-[#0e1422] flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border)]">
-                    <span className="text-xs font-mono text-[var(--primary)] font-semibold">
-                      ESPECIALIDADES DE BANCADA
-                    </span>
-                    <span className="text-[11px] font-mono text-[var(--foreground-muted)]">
-                      R. Inácio Monteiro, 762
-                    </span>
-                  </div>
-
-                  <ul className="space-y-2.5 text-xs sm:text-sm text-[var(--foreground)]">
-                    <li className="flex items-start gap-2.5">
-                      <span className="font-mono text-[var(--primary)] text-xs mt-0.5">01</span>
-                      <div>
-                        <strong>Telas e Displays:</strong> iPhone, Samsung, Moto, Xiaomi
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <span className="font-mono text-[var(--primary)] text-xs mt-0.5">02</span>
-                      <div>
-                        <strong>Baterias e Conectores:</strong> Autonomia e recarga restabelecidas
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <span className="font-mono text-[var(--primary)] text-xs mt-0.5">03</span>
-                      <div>
-                        <strong>Placas e Microssolda:</strong> Recuperação de circuitos lógicos
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <span className="font-mono text-[var(--primary)] text-xs mt-0.5">04</span>
-                      <div>
-                        <strong>iPhone Especializado:</strong> Tampa traseira de vidro e Face ID
-                      </div>
-                    </li>
-                  </ul>
+              {/* Center visual: Official circular logo presentation */}
+              <div className="p-6 sm:p-8 flex flex-col items-center text-center">
+                <div className="relative w-36 h-36 sm:w-44 sm:h-44 mx-auto mb-4 drop-shadow-[0_12px_28px_rgba(37,99,235,0.3)]">
+                  <Image
+                    src="/logo-circle.png"
+                    alt="Wesley Cell Logotipo"
+                    fill
+                    sizes="(max-width: 640px) 144px, 176px"
+                    className="object-contain"
+                    priority
+                  />
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[var(--border)] flex items-center justify-between">
-                  <div className="text-[11px] text-[var(--foreground-muted)]">
-                    Atendimento presencial ou pelo WhatsApp
-                  </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                  Soluções em Celulares e Tablets
+                </h3>
+                <p className="text-xs text-[var(--foreground-muted)] mt-1.5 max-w-xs leading-relaxed">
+                  Assistência técnica especializada com laboratório de bancada próprio na Rua Inácio Monteiro, 762.
+                </p>
+
+                {/* Specialties chip tags */}
+                <div className="mt-5 flex flex-wrap justify-center gap-1.5 text-[11px] font-medium text-[var(--foreground-muted)]">
+                  <span className="px-2.5 py-1 rounded bg-[var(--surface-elevated)] border border-[var(--border)] text-white">
+                    Telas & Displays
+                  </span>
+                  <span className="px-2.5 py-1 rounded bg-[var(--surface-elevated)] border border-[var(--border)] text-white">
+                    Baterias
+                  </span>
+                  <span className="px-2.5 py-1 rounded bg-[var(--surface-elevated)] border border-[var(--border)] text-white">
+                    Conectores
+                  </span>
+                  <span className="px-2.5 py-1 rounded bg-[var(--surface-elevated)] border border-[var(--border)] text-white">
+                    Placa Lógica
+                  </span>
+                  <span className="px-2.5 py-1 rounded bg-[var(--surface-elevated)] border border-[var(--border)] text-white">
+                    Tampa Traseira iPhone
+                  </span>
+                  <span className="px-2.5 py-1 rounded bg-[var(--surface-elevated)] border border-[var(--border)] text-white">
+                    Face ID
+                  </span>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-[var(--border)] w-full flex items-center justify-between text-xs">
+                  <span className="text-[var(--foreground-dim)] font-mono">
+                    (11) 94889-6283
+                  </span>
                   <a
                     href={getWhatsAppUrl()}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-semibold text-[var(--primary)] hover:text-white transition-colors"
+                    className="text-[var(--primary-light)] hover:text-white font-semibold transition-colors"
                   >
-                    Consultar agora →
+                    Chamar no WhatsApp →
                   </a>
                 </div>
               </div>

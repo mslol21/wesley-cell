@@ -1,19 +1,26 @@
 import React from "react";
-import { Wrench, Phone, MapPin, Clock } from "lucide-react";
+import Image from "next/image";
+import { Phone, MapPin, Clock } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
 
 export function Footer() {
   return (
-    <footer className="bg-[#080b13] text-[var(--foreground-muted)] text-xs border-t border-[var(--border)]">
+    <footer className="bg-[#050812] text-[var(--foreground-muted)] text-xs border-t border-[var(--border)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Brand Col */}
+          {/* Brand Col with official logo */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-[var(--radius-sm)] bg-[var(--surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--primary)]">
-                <Wrench className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-2.5">
+              <div className="relative w-8 h-8 rounded-full overflow-hidden border border-[var(--primary)]/40 shrink-0 bg-[#061129]">
+                <Image
+                  src="/logo-circle.png"
+                  alt="Wesley Cell Logo"
+                  fill
+                  sizes="32px"
+                  className="object-cover"
+                />
               </div>
-              <span className="font-bold text-base tracking-tight text-[var(--foreground)]">
+              <span className="font-bold text-base tracking-tight text-white">
                 WESLEY CELL
               </span>
             </div>
@@ -25,7 +32,7 @@ export function Footer() {
                 href={SITE_CONFIG.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--primary)] hover:underline inline-flex items-center gap-1.5 font-medium"
+                className="text-[var(--primary-light)] hover:underline inline-flex items-center gap-1.5 font-medium"
               >
                 <span>Instagram: {SITE_CONFIG.instagramHandle}</span>
               </a>
@@ -34,7 +41,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-2.5">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white">
               Navegação
             </h4>
             <ul className="space-y-2">
@@ -68,12 +75,12 @@ export function Footer() {
 
           {/* Contact Details */}
           <div className="space-y-2.5">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white">
               Atendimento e Balcão
             </h4>
             <div className="space-y-2">
               <p className="flex items-start gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[var(--primary)] shrink-0 mt-0.5" />
+                <MapPin className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0 mt-0.5" />
                 <span>
                   {SITE_CONFIG.address.street}
                   <br />
@@ -81,8 +88,8 @@ export function Footer() {
                 </span>
               </p>
               <p className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
-                <a href={`tel:${SITE_CONFIG.phoneRaw}`} className="hover:text-white font-medium">
+                <Phone className="w-3.5 h-3.5 text-[var(--primary-light)] shrink-0" />
+                <a href={`tel:${SITE_CONFIG.phoneRaw}`} className="hover:text-white font-medium text-white">
                   {SITE_CONFIG.phoneDisplay}
                 </a>
               </p>
@@ -91,15 +98,15 @@ export function Footer() {
 
           {/* Horários */}
           <div className="space-y-2.5">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)] flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5 text-[var(--primary)]" />
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-[var(--primary-light)]" />
               <span>Horários de Funcionamento</span>
             </h4>
             <div className="space-y-1.5 text-xs text-[var(--foreground-muted)]">
               {SITE_CONFIG.hours.map((h, i) => (
                 <div key={i} className="flex justify-between py-1 border-b border-[var(--border)] last:border-none">
                   <span>{h.days}</span>
-                  <span className="text-[var(--foreground)] font-mono">{h.time}</span>
+                  <span className="text-white font-mono">{h.time}</span>
                 </div>
               ))}
             </div>

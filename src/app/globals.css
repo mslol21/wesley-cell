@@ -2,29 +2,31 @@
 
 @layer base {
   :root {
-    --background: #0b0f19;
-    --surface: #111726;
-    --surface-elevated: #172033;
-    --surface-subtle: rgba(255, 255, 255, 0.025);
+    /* Wesley Cell Brand Palette derived from official circular badge */
+    --background: #080d1a;
+    --surface: #0f182c;
+    --surface-elevated: #15223c;
+    --surface-subtle: rgba(37, 99, 235, 0.04);
 
-    --border: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.16);
+    --border: rgba(59, 130, 246, 0.12);
+    --border-strong: rgba(59, 130, 246, 0.24);
     --border-focus: #3b82f6;
 
-    --foreground: #f1f5f9;
+    --foreground: #f8fafc;
     --foreground-muted: #94a3b8;
     --foreground-dim: #64748b;
 
     --primary: #2563eb;
     --primary-hover: #1d4ed8;
-    --primary-subtle: rgba(37, 99, 235, 0.1);
+    --primary-light: #3b82f6;
+    --primary-subtle: rgba(37, 99, 235, 0.12);
 
     --whatsapp: #25d366;
     --whatsapp-hover: #20bd5a;
 
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
   }
 
   * {
@@ -54,17 +56,23 @@
   }
 }
 
-/* Custom crisp scrollbar */
+/* Subtle circuit grid pattern helper */
+.bg-tech-pattern {
+  background-image: radial-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: #080d1a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #1e2e4a;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #2563eb;
 }
