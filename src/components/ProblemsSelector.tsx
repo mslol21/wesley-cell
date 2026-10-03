@@ -3,249 +3,196 @@
 import React, { useState } from "react";
 import {
   Smartphone,
-  BatteryCharging,
+  BatteryMedium,
   Zap,
-  Droplets,
-  Volume2,
-  RotateCw,
   Camera,
-  ShieldAlert,
-  ArrowRight,
+  Sliders,
+  RotateCw,
+  Cpu,
+  Layers,
+  HelpCircle,
   MessageSquare,
-  Clock,
-  CheckCircle,
+  ArrowRight,
+  Check,
 } from "lucide-react";
 import { getWhatsAppUrl } from "@/config/site";
 import { SectionHeader } from "./ui/SectionHeader";
 import { Button } from "./ui/Button";
 
-interface ProblemItem {
+interface ProblemOption {
   id: string;
+  label: string;
   title: string;
-  shortDesc: string;
+  desc: string;
   icon: React.ComponentType<{ className?: string }>;
-  symptoms: string[];
-  turnaround: string;
   whatsappText: string;
 }
 
-const PROBLEMS: ProblemItem[] = [
+const PROBLEMS: ProblemOption[] = [
   {
     id: "tela",
-    title: "Tela trincada ou sem toque",
-    shortDesc: "Vidro quebrado, manchas pretas, linhas coloridas ou toque não responde.",
+    label: "Tela / Touch",
+    title: "Problema na tela ou touch screen",
+    desc: "Vidro quebrado, display piscando, tela preta, listras coloridas ou toque sem resposta.",
     icon: Smartphone,
-    symptoms: ["Display piscando", "Toque fantasma", "Vidro quebrado com tela preta"],
-    turnaround: "40 a 90 minutos",
-    whatsappText: "Olá! Meu celular quebrou a tela / parou de dar toque. Gostaria de um orçamento para a troca.",
+    whatsappText:
+      "Olá! Encontrei a Wesley Cell pelo site. Estou com problema na tela do meu celular e gostaria de solicitar um orçamento.",
   },
   {
     id: "bateria",
-    title: "Bateria viciada ou estufada",
-    shortDesc: "Descarrega rápido, desliga antes de 0% ou aparelho esquenta muito.",
-    icon: BatteryCharging,
-    symptoms: ["Tampa traseira levantando", "Desliga ao abrir a câmera", "Reinicia repentinamente"],
-    turnaround: "30 a 60 minutos",
-    whatsappText: "Olá! A bateria do meu celular está descarregando muito rápido / estufando. Gostaria de um orçamento para substituição.",
+    label: "Bateria",
+    title: "Bateria descarregando rápido ou estufada",
+    desc: "Aparelho desliga sozinho antes de zerar, esquenta no uso simples ou a tampa traseira está levantando.",
+    icon: BatteryMedium,
+    whatsappText:
+      "Olá! Encontrei a Wesley Cell pelo site. Preciso trocar a bateria do meu celular e gostaria de um orçamento.",
   },
   {
     id: "conector",
-    title: "Não carrega ou mau contato",
-    shortDesc: "Precisa dobrar o cabo, carregamento lento ou conector solto.",
+    label: "Não carrega",
+    title: "Não carrega ou mau contato no cabo",
+    desc: "Cabo precisa ficar em uma posição específica para carregar, porta frouxa ou aviso de erro na entrada.",
     icon: Zap,
-    symptoms: ["Aviso de umidade falso", "Cabo não encaixa até o final", "Carga intermitente"],
-    turnaround: "45 a 90 minutos",
-    whatsappText: "Olá! Meu celular não está carregando direito / conector com mau contato. Gostaria de saber o valor do reparo.",
-  },
-  {
-    id: "molhou",
-    title: "Caiu na água ou molhou",
-    shortDesc: "Desligamento imediato, condensação na câmera ou oxidação de circuito.",
-    icon: Droplets,
-    symptoms: ["Não ligue o aparelho", "Não coloque no arroz", "Desoxidação em cuba ultrassônica"],
-    turnaround: "Análise na bancada (24h)",
-    whatsappText: "Olá! Meu celular molhou e preciso de uma desoxidação urgente na bancada.",
-  },
-  {
-    id: "audio",
-    title: "Sem som ou microfone mudo",
-    shortDesc: "Não escuta chamadas, viva-voz baixo ou ninguém te ouve nos áudios.",
-    icon: Volume2,
-    symptoms: ["Áudio do WhatsApp mudo", "Auricular chiando", "Alto-falante distorcido"],
-    turnaround: "45 a 90 minutos",
-    whatsappText: "Olá! Meu celular está sem áudio / microfone mudo. Quanto fica o conserto?",
-  },
-  {
-    id: "sistema",
-    title: "Travado na logo ou reiniciando",
-    shortDesc: "Fica em loop no logotipo da marca, travamentos ou erro de inicialização.",
-    icon: RotateCw,
-    symptoms: ["Memória cheia", "Falha após atualização", "Restauração de firmware limpo"],
-    turnaround: "1 a 3 horas",
-    whatsappText: "Olá! Meu celular está travado na tela da logo e reiniciando. Como posso proceder para orçar?",
+    whatsappText:
+      "Olá! Encontrei a Wesley Cell pelo site. Meu aparelho não está carregando direito e gostaria de um orçamento para o conector.",
   },
   {
     id: "camera",
-    title: "Câmera borrada ou lente quebrada",
-    shortDesc: "Vidro da lente estilhaçado, foco tremendo ou aviso de erro ao abrir.",
+    label: "Câmera",
+    title: "Câmera embaçada ou lente quebrada",
+    desc: "Vidro externo da câmera trincado, fotos fora de foco, manchas escuras ou aplicativo fecha sozinho.",
     icon: Camera,
-    symptoms: ["Foco automático não trava", "Manchas escuras nas fotos", "Vidro externo quebrado"],
-    turnaround: "1 a 2 horas",
-    whatsappText: "Olá! A câmera / lente do meu celular quebrou. Gostaria de cotar a substituição.",
+    whatsappText:
+      "Olá! Encontrei a Wesley Cell pelo site. Estou com problema na câmera do meu celular e gostaria de um orçamento.",
   },
   {
-    id: "carcaca",
-    title: "Tampa traseira ou chassi torto",
-    shortDesc: "Traseira de vidro estilhaçada, aro amassado ou botões travados.",
-    icon: ShieldAlert,
-    symptoms: ["Vidro traseiro quebrado", "Botões laterais afundados", "Aro desalinhado"],
-    turnaround: "1 a 3 horas",
-    whatsappText: "Olá! A tampa traseira / carcaça do meu celular precisa ser trocada. Qual o orçamento?",
+    id: "botoes",
+    label: "Botões",
+    title: "Botão Power ou Volume não funciona",
+    desc: "Botões travados, afundados, aparelho não bloqueia nem liga sem o carregador conectado.",
+    icon: Sliders,
+    whatsappText:
+      "Olá! Encontrei a Wesley Cell pelo site. Os botões do meu aparelho não estão funcionando e gostaria de um orçamento.",
+  },
+  {
+    id: "sistema",
+    label: "Sistema",
+    title: "Travado na logo ou reiniciando",
+    desc: "Aparelho fica em loop de inicialização na logo da marca, memória cheia travando ou erro no sistema.",
+    icon: RotateCw,
+    whatsappText:
+      "Olá! Encontrei a Wesley Cell pelo site. Meu aparelho está travado no sistema e gostaria de uma avaliação.",
+  },
+  {
+    id: "placa",
+    label: "Placa Lógica",
+    title: "Celular não liga ou em curto",
+    desc: "Aparelho apagou completamente, sofreu queda grave ou requer análise técnica com microssolda.",
+    icon: Cpu,
+    whatsappText:
+      "Olá! Encontrei a Wesley Cell pelo site. Meu celular precisa de reparo em placa lógica e gostaria de um orçamento.",
+  },
+  {
+    id: "iphone",
+    label: "Tampa iPhone / Face ID",
+    title: "Tampa traseira de iPhone ou Face ID",
+    desc: "Substituição do vidro traseiro estilhaçado de iPhone e diagnóstico para sensores de Face ID.",
+    icon: Layers,
+    whatsappText:
+      "Olá! Encontrei a Wesley Cell pelo site. Gostaria de um orçamento para troca da tampa traseira / Face ID do meu iPhone.",
+  },
+  {
+    id: "outro",
+    label: "Outro defeito",
+    title: "Outro problema ou conserto de tablet",
+    desc: "Áudio mudo, aparelho que molhou, reparos em tablets ou orçamento personalizado.",
+    icon: HelpCircle,
+    whatsappText:
+      "Olá! Encontrei a Wesley Cell pelo site. Gostaria de explicar o defeito do meu aparelho para pedir um orçamento.",
   },
 ];
 
 export function ProblemsSelector() {
   const [selectedId, setSelectedId] = useState<string>("tela");
-
-  const activeProblem = PROBLEMS.find((p) => p.id === selectedId) || PROBLEMS[0];
-  const IconComponent = activeProblem.icon;
+  const selected = PROBLEMS.find((p) => p.id === selectedId) || PROBLEMS[0];
+  const IconComponent = selected.icon;
 
   return (
-    <section id="problemas" className="py-12 md:py-20 border-b border-[var(--border)] scroll-mt-20">
+    <section id="diagnostico" className="py-12 sm:py-16 md:py-20 border-b border-[var(--border)] scroll-mt-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          label="01 // Seletor de Diagnóstico"
-          title="Qual problema seu celular está apresentando?"
-          description="Selecione o sintoma para entender a causa mais provável, estimativa de tempo de bancada e solicitar orçamento direto."
+          label="Diagnóstico Direto"
+          title="O que aconteceu com seu celular?"
+          description="Selecione o sintoma para enviar os detalhes no WhatsApp da Wesley Cell com mensagem já preparada:"
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Functional Selector Grid - Not giant cards, compact & tactile */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {PROBLEMS.map((item) => {
-              const ItemIcon = item.icon;
-              const isSelected = item.id === selectedId;
+        {/* Refined Problem Grid Selector - Tactile and functional, not oversized cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-2.5">
+          {PROBLEMS.map((item) => {
+            const isSelected = item.id === selectedId;
+            const ItemIcon = item.icon;
 
-              return (
-                <div
-                  key={item.id}
-                  onClick={() => setSelectedId(item.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setSelectedId(item.id);
-                    }
-                  }}
-                  tabIndex={0}
-                  role="button"
-                  aria-pressed={isSelected}
-                  className={`group relative text-left p-4 rounded-[var(--radius-sm)] border transition-all duration-150 cursor-pointer select-none ${
-                    isSelected
-                      ? "bg-[var(--surface-elevated)] border-[var(--primary)] shadow-sm"
-                      : "bg-[var(--surface)] border-[var(--border)] hover:border-[var(--border-strong)] hover:bg-[#131b2b]"
-                  }`}
-                >
-                  <div className="flex items-start gap-3">
-                    <div
-                      className={`w-9 h-9 rounded-[var(--radius-sm)] flex items-center justify-center shrink-0 transition-colors ${
-                        isSelected
-                          ? "bg-[var(--primary)] text-white"
-                          : "bg-[var(--surface-elevated)] text-[var(--foreground-muted)] group-hover:text-[var(--foreground)]"
-                      }`}
-                    >
-                      <ItemIcon className="w-4 h-4 stroke-[1.75]" />
-                    </div>
-
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between">
-                        <h3
-                          className={`text-sm font-semibold truncate ${
-                            isSelected ? "text-white" : "text-[var(--foreground)]"
-                          }`}
-                        >
-                          {item.title}
-                        </h3>
-                      </div>
-                      <p className="text-xs text-[var(--foreground-muted)] mt-1 line-clamp-2 leading-relaxed">
-                        {item.shortDesc}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Mobile Direct Action Link */}
-                  <div className="mt-3 pt-2.5 border-t border-[var(--border)] flex items-center justify-between text-xs">
-                    <span className="text-[11px] font-mono text-[var(--foreground-dim)]">
-                      {item.turnaround}
-                    </span>
-                    <a
-                      href={getWhatsAppUrl(item.whatsappText)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center text-[var(--primary)] hover:text-white font-medium group-hover:translate-x-0.5 transition-transform"
-                    >
-                      <span>Consultar</span>
-                      <ArrowRight className="w-3.5 h-3.5 ml-1" />
-                    </a>
-                  </div>
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setSelectedId(item.id)}
+                className={`p-3 sm:p-3.5 text-left rounded-[var(--radius-sm)] border transition-all text-xs font-medium flex flex-col justify-between min-h-[72px] sm:min-h-[80px] cursor-pointer ${
+                  isSelected
+                    ? "bg-[var(--surface-elevated)] border-[var(--primary)] text-white shadow-sm"
+                    : "bg-[var(--surface)] border-[var(--border)] text-[var(--foreground-muted)] hover:border-[var(--border-strong)] hover:text-[var(--foreground)]"
+                }`}
+              >
+                <div className="flex items-center justify-between w-full">
+                  <ItemIcon
+                    className={`w-4 h-4 ${
+                      isSelected ? "text-[var(--primary)]" : "text-[var(--foreground-dim)]"
+                    }`}
+                  />
+                  {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)]" />}
                 </div>
-              );
-            })}
-          </div>
+                <span className="font-semibold mt-2 truncate w-full text-left">{item.label}</span>
+              </button>
+            );
+          })}
+        </div>
 
-          {/* Active Problem Summary & Direct WhatsApp Action Panel */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24">
-            <div className="rounded-[var(--radius-md)] border border-[var(--border-strong)] bg-[var(--surface-elevated)] p-6 shadow-md">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[var(--primary)] uppercase tracking-wider mb-2">
-                <span>Diagnóstico Selecionado</span>
-              </div>
-
-              <div className="flex items-center gap-3.5 mt-2 pb-4 border-b border-[var(--border)]">
-                <div className="w-11 h-11 rounded-[var(--radius-sm)] bg-[var(--primary)]/15 border border-[var(--primary)]/30 text-[var(--primary)] flex items-center justify-center shrink-0">
-                  <IconComponent className="w-6 h-6 stroke-[2]" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-[var(--foreground)]">
-                    {activeProblem.title}
-                  </h3>
-                  <div className="flex items-center gap-1.5 text-xs text-[var(--foreground-muted)] mt-0.5">
-                    <Clock className="w-3.5 h-3.5 text-[var(--primary)]" />
-                    <span>Tempo médio de reparo: {activeProblem.turnaround}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground-dim)] mb-2">
-                  Sintomas e observações de bancada:
-                </h4>
-                <ul className="space-y-2 text-xs sm:text-sm text-[var(--foreground-muted)]">
-                  {activeProblem.symptoms.map((symptom, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-[var(--primary)] shrink-0 mt-0.5" />
-                      <span>{symptom}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-6 pt-5 border-t border-[var(--border)]">
-                <p className="text-xs text-[var(--foreground-muted)] mb-3">
-                  Para informar a marca e o modelo do seu celular e obter um valor exato:
-                </p>
-                <a
-                  href={getWhatsAppUrl(activeProblem.whatsappText)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full block"
-                >
-                  <Button variant="whatsapp" size="lg" className="w-full justify-center">
-                    <MessageSquare className="w-5 h-5 mr-2" />
-                    Pedir orçamento deste reparo
-                  </Button>
-                </a>
+        {/* Action Panel for Selected Item */}
+        <div className="mt-6 p-5 sm:p-6 rounded-[var(--radius-md)] border border-[var(--border-strong)] bg-[var(--surface)] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="flex items-start gap-4 max-w-2xl">
+            <div className="w-10 h-10 rounded-[var(--radius-sm)] bg-[var(--surface-elevated)] border border-[var(--border)] text-[var(--primary)] flex items-center justify-center shrink-0 mt-0.5">
+              <IconComponent className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-[var(--foreground)]">
+                {selected.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-[var(--foreground-muted)] mt-1 leading-relaxed">
+                {selected.desc}
+              </p>
+              <div className="mt-2.5 flex items-center gap-2 text-xs text-[var(--foreground-dim)]">
+                <Check className="w-3.5 h-3.5 text-[var(--primary)]" />
+                <span>Atendimento na Rua Inácio Monteiro, 762</span>
               </div>
             </div>
+          </div>
+
+          <div className="w-full md:w-auto shrink-0">
+            <a
+              href={getWhatsAppUrl(selected.whatsappText)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full sm:w-auto"
+            >
+              <Button
+                variant="whatsapp"
+                size="lg"
+                className="w-full sm:w-auto justify-center text-sm font-semibold h-11 px-6"
+              >
+                <MessageSquare className="w-4 h-4 mr-2" />
+                Pedir orçamento deste problema
+              </Button>
+            </a>
           </div>
         </div>
       </div>

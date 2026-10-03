@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { MessageSquare, Phone, Menu, X, Clock, MapPin, Wrench } from "lucide-react";
+import { MessageSquare, Phone, Menu, X, MapPin, Wrench } from "lucide-react";
 import { SITE_CONFIG, getWhatsAppUrl } from "@/config/site";
 import { Button } from "./ui/Button";
 
@@ -17,7 +17,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -27,93 +26,113 @@ export function Header() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: "Problemas comuns", href: "#problemas" },
+    { label: "Diagnóstico", href: "#diagnostico" },
     { label: "Serviços", href: "#servicos" },
-    { label: "Como funciona", href: "#processo" },
-    { label: "Acessórios", href: "#acessorios" },
+    { label: "Como Funciona", href: "#processo" },
     { label: "Localização", href: "#localizacao" },
-    { label: "Dúvidas", href: "#faq" },
+    { label: "Dúvidas", href: "#duvidas" },
   ];
 
   return (
     <>
       <header
-        className={`sticky top-0 z-40 w-full transition-all duration-200 ${
+        className={`sticky top-0 z-40 w-full transition-all duration-150 ${
           scrolled
-            ? "bg-[#090d16]/95 backdrop-blur-md border-b border-[var(--border)] shadow-sm"
-            : "bg-[#090d16] border-b border-[var(--border)]"
+            ? "bg-[#0b0f19]/95 backdrop-blur-md border-b border-[var(--border)] shadow-sm"
+            : "bg-[#0b0f19] border-b border-[var(--border)]"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+        {/* Top announcement bar: Exact physical address */}
+        <div className="bg-[var(--surface)] border-b border-[var(--border)] px-4 py-1.5 text-[11px] sm:text-xs text-[var(--foreground-muted)]">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
+              <span>
+                <strong className="text-[var(--foreground)] font-medium">
+                  {SITE_CONFIG.address.street}
+                </strong>{" "}
+                — {SITE_CONFIG.address.region}, SP
+              </span>
+            </div>
+            <div className="hidden sm:flex items-center gap-3">
+              <a
+                href={SITE_CONFIG.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                {SITE_CONFIG.instagramHandle}
+              </a>
+              <span className="text-[var(--border-strong)]">|</span>
+              <a
+                href={`tel:${SITE_CONFIG.phoneRaw}`}
+                className="hover:text-white transition-colors"
+              >
+                {SITE_CONFIG.phoneDisplay}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Navigation Bar */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo & Brand Identity */}
           <a
             href="#"
-            className="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-[var(--border-focus)] rounded-sm"
+            className="flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-[var(--border-focus)] rounded-sm"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-[var(--radius-sm)] bg-[var(--surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--primary)] group-hover:border-[var(--primary)] transition-colors">
-              <Wrench className="w-5 h-5 stroke-[2]" />
+            <div className="w-8 h-8 rounded-[var(--radius-sm)] bg-[var(--surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--primary)]">
+              <Wrench className="w-4 h-4" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-lg sm:text-xl font-bold tracking-tight text-[var(--foreground)]">
+                <span className="text-base sm:text-lg font-bold tracking-tight text-[var(--foreground)]">
                   WESLEY CELL
                 </span>
-                <span className="hidden sm:inline-flex items-center px-2 py-0.5 text-[10px] font-medium tracking-wide uppercase bg-[var(--primary-subtle)] text-[var(--primary)] rounded border border-[var(--primary)]/20">
-                  Bancada Especializada
-                </span>
               </div>
-              <p className="text-[11px] sm:text-xs text-[var(--foreground-muted)] hidden xs:block">
-                Assistência Técnica de Smartphones
+              <p className="text-[10px] sm:text-[11px] text-[var(--foreground-muted)] uppercase tracking-wider">
+                Celulares e Tablets
               </p>
             </div>
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors py-2"
+                className="text-xs font-medium uppercase tracking-wider text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors py-2"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Action CTAs */}
+          {/* Direct conversion actions */}
           <div className="hidden sm:flex items-center gap-3">
-            <a
-              href={`tel:${SITE_CONFIG.phoneRaw}`}
-              className="text-xs text-[var(--foreground-muted)] hover:text-[var(--foreground)] flex items-center gap-1.5 px-3 py-2 rounded-md hover:bg-[var(--surface-subtle)] transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 text-[var(--primary)]" />
-              <span>{SITE_CONFIG.phoneDisplay}</span>
-            </a>
-
             <a
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Pedir orçamento no WhatsApp"
             >
-              <Button variant="whatsapp" size="sm" className="h-10 px-4">
-                <MessageSquare className="w-4 h-4 mr-1.5" />
-                Pedir orçamento
+              <Button variant="whatsapp" size="sm" className="h-9 px-4 text-xs font-semibold">
+                <MessageSquare className="w-3.5 h-3.5 mr-1.5" />
+                Pedir Orçamento
               </Button>
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Actions */}
           <div className="flex items-center gap-2 lg:hidden">
             <a
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
               className="sm:hidden"
-              aria-label="WhatsApp direto"
             >
-              <Button variant="whatsapp" size="sm" className="h-9 px-3 text-xs">
+              <Button variant="whatsapp" size="sm" className="h-8 px-3 text-xs">
                 <MessageSquare className="w-3.5 h-3.5 mr-1" />
                 Orçamento
               </Button>
@@ -122,88 +141,73 @@ export function Header() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-10 h-10 flex items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:bg-[var(--surface-elevated)] transition-colors"
-              aria-label={mobileMenuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"}
+              className="w-9 h-9 flex items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:bg-[var(--surface-elevated)] transition-colors"
+              aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Accessible Mobile Drawer */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 z-50 lg:hidden flex flex-col bg-[#090d16] text-[var(--foreground)] animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 lg:hidden flex flex-col bg-[#0b0f19] text-[var(--foreground)]"
           role="dialog"
           aria-modal="true"
-          aria-label="Menu principal"
+          aria-label="Menu de navegação"
         >
-          {/* Mobile Drawer Top Bar */}
-          <div className="flex items-center justify-between px-4 sm:px-6 h-16 border-b border-[var(--border)]">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-[var(--radius-sm)] bg-[var(--surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--primary)]">
-                <Wrench className="w-4 h-4" />
-              </div>
-              <span className="font-bold text-base tracking-tight">WESLEY CELL</span>
-            </div>
+          <div className="flex items-center justify-between px-4 h-14 border-b border-[var(--border)]">
+            <span className="font-bold text-sm tracking-tight">WESLEY CELL</span>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-10 h-10 flex items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)]"
+              className="w-8 h-8 flex items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] text-[var(--foreground)]"
               aria-label="Fechar menu"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Links list */}
-          <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col justify-between">
-            <nav className="flex flex-col space-y-4">
+          <div className="flex-1 overflow-y-auto px-5 py-6 flex flex-col justify-between">
+            <nav className="flex flex-col divide-y divide-[var(--border)]">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-medium text-[var(--foreground)] hover:text-[var(--primary)] py-2 border-b border-[var(--border)] transition-colors"
+                  className="text-base font-medium py-3 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors"
                 >
                   {link.label}
                 </a>
               ))}
             </nav>
 
-            <div className="mt-8 pt-6 border-t border-[var(--border)] space-y-4">
-              <div className="text-xs text-[var(--foreground-muted)] space-y-2">
-                <p className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-[var(--primary)]" />
-                  <span>{SITE_CONFIG.address.street}</span>
+            <div className="pt-6 border-t border-[var(--border)] space-y-4">
+              <div className="text-xs text-[var(--foreground-muted)] space-y-1.5">
+                <p className="flex items-start gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-[var(--primary)] shrink-0 mt-0.5" />
+                  <span>{SITE_CONFIG.address.full}</span>
                 </p>
-                <p className="flex items-center gap-2">
-                  <Clock className="w-3.5 h-3.5 text-[var(--primary)]" />
-                  <span>Seg–Sex: 08:30 às 18:30 | Sáb: 08:30 às 13:00</span>
+                <p className="flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
+                  <span>{SITE_CONFIG.phoneDisplay}</span>
                 </p>
               </div>
 
-              <div className="pt-2 flex flex-col gap-2.5">
-                <a
-                  href={getWhatsAppUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full"
-                >
-                  <Button variant="whatsapp" size="lg" className="w-full justify-center">
-                    <MessageSquare className="w-5 h-5 mr-2" />
-                    Falar no WhatsApp
-                  </Button>
-                </a>
-                <a href={`tel:${SITE_CONFIG.phoneRaw}`} className="w-full">
-                  <Button variant="secondary" size="md" className="w-full justify-center">
-                    <Phone className="w-4 h-4 mr-2" />
-                    Ligar: {SITE_CONFIG.phoneDisplay}
-                  </Button>
-                </a>
-              </div>
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full"
+              >
+                <Button variant="whatsapp" size="lg" className="w-full justify-center">
+                  <MessageSquare className="w-4 h-4 mr-2" />
+                  Chamar no WhatsApp
+                </Button>
+              </a>
             </div>
           </div>
         </div>

@@ -1,38 +1,48 @@
 import React from "react";
-import { MessageSquare, ArrowDown, ShieldCheck, CheckCircle2, Clock } from "lucide-react";
+import { MessageSquare, ArrowDown, MapPin, Wrench, Shield, Check } from "lucide-react";
 import { SITE_CONFIG, getWhatsAppUrl } from "@/config/site";
 import { Button } from "./ui/Button";
 
 export function Hero() {
   return (
-    <section className="relative pt-8 pb-14 md:pt-14 md:pb-20 border-b border-[var(--border)] overflow-hidden">
+    <section className="relative pt-6 pb-12 sm:pt-10 sm:pb-16 lg:pt-14 lg:pb-20 border-b border-[var(--border)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          {/* Left Column: Editorial Information */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Column: Immediate clarity and fast conversion */}
           <div className="lg:col-span-7 flex flex-col text-left">
-            {/* Context tag */}
-            <div className="inline-flex items-center gap-2 mb-4 self-start">
-              <span className="w-2 h-2 rounded-full bg-[var(--success)] animate-pulse" />
-              <span className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground-muted)]">
-                Bancada Ativa • Atendimento no Centro
+            {/* Eyebrow */}
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-2 h-2 rounded-full bg-[var(--primary)]" />
+              <span className="text-xs font-semibold tracking-wider uppercase text-[var(--foreground-muted)]">
+                {SITE_CONFIG.tagline}
               </span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-[var(--foreground)] tracking-tight leading-[1.12]">
-              Conserto ágil e transparente para o seu celular.
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[var(--foreground)] leading-[1.12]">
+              {SITE_CONFIG.headline}
             </h1>
 
-            {/* Description */}
-            <p className="mt-5 text-base sm:text-lg md:text-xl text-[var(--foreground-muted)] leading-relaxed max-w-2xl font-normal">
-              Diagnóstico preciso, peças de alta qualidade e garantia legal de 90 dias.
-              Fale direto com o técnico pelo WhatsApp e saiba prazo e valor antes de sair de casa.
+            {/* Short text */}
+            <p className="mt-4 text-base sm:text-lg text-[var(--foreground-muted)] leading-relaxed max-w-xl font-normal">
+              {SITE_CONFIG.subheadline}
             </p>
 
-            {/* Main Action CTAs */}
-            <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 max-w-lg">
+            {/* Location & Quick Context Tag */}
+            <div className="mt-4 flex items-center gap-2 text-xs text-[var(--foreground-muted)]">
+              <MapPin className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
+              <span>
+                Atendimento no balcão:{" "}
+                <strong className="text-[var(--foreground)] font-medium">
+                  {SITE_CONFIG.address.street}
+                </strong>
+              </span>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
-                href={getWhatsAppUrl("Olá! Preciso consertar meu celular e gostaria de solicitar um orçamento.")}
+                href={getWhatsAppUrl("Olá! Encontrei a Wesley Cell pelo site e gostaria de solicitar um orçamento.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto"
@@ -40,109 +50,110 @@ export function Hero() {
                 <Button
                   variant="whatsapp"
                   size="lg"
-                  className="w-full sm:w-auto justify-center text-base font-semibold"
+                  className="w-full sm:w-auto justify-center text-sm sm:text-base font-semibold h-12 px-6"
                 >
-                  <MessageSquare className="w-5 h-5 mr-2" />
-                  Pedir orçamento no WhatsApp
+                  <MessageSquare className="w-4 h-4 mr-2" />
+                  PEDIR ORÇAMENTO
                 </Button>
               </a>
 
-              <a href="#problemas" className="w-full sm:w-auto">
+              <a href="#servicos" className="w-full sm:w-auto">
                 <Button
                   variant="secondary"
                   size="lg"
-                  className="w-full sm:w-auto justify-center text-sm"
+                  className="w-full sm:w-auto justify-center text-sm h-12 px-5"
                 >
                   <ArrowDown className="w-4 h-4 mr-2" />
-                  Identificar meu problema
+                  VER SERVIÇOS
                 </Button>
               </a>
             </div>
 
-            {/* Trust Points - Subtle, non-cardified list */}
-            <div className="mt-10 pt-6 border-t border-[var(--border)] grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-[var(--foreground-muted)]">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[var(--primary)] shrink-0" />
-                <span>Garantia de 90 dias em todos os serviços</span>
+            {/* Fast Trust Cues (Authentic, not fictitious) */}
+            <div className="mt-8 pt-5 border-t border-[var(--border)] grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs text-[var(--foreground-muted)]">
+              <div className="flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
+                <span>Orçamento sem enrolação</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-[var(--primary)] shrink-0" />
-                <span>Reparos comuns de 40 a 90 minutos</span>
+              <div className="flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
+                <span>Celulares e Tablets</span>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[var(--primary)] shrink-0" />
-                <span>Atendimento direto com quem repara</span>
+              <div className="flex items-center gap-1.5 col-span-2 sm:col-span-1">
+                <Check className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
+                <span>Loja física na Zona Leste</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Real Bench Visual Composition / Editorial Placeholder */}
+          {/* Right Column: Editorial Technical Workshop Frame */}
           <div className="lg:col-span-5 w-full">
-            <div className="relative rounded-[var(--radius-md)] border border-[var(--border-strong)] bg-[var(--surface)] overflow-hidden shadow-md">
-              {/* Technical Bench Frame Header */}
-              <div className="px-4 py-3 border-b border-[var(--border)] bg-[var(--surface-elevated)] flex items-center justify-between">
+            <div className="rounded-[var(--radius-md)] border border-[var(--border-strong)] bg-[var(--surface)] overflow-hidden">
+              {/* Technical Frame Top */}
+              <div className="px-4 py-2.5 bg-[var(--surface-elevated)] border-b border-[var(--border)] flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[var(--success)]" />
-                  <span className="text-xs font-semibold tracking-wide text-[var(--foreground)] uppercase">
-                    Bancada Técnica Wesley Cell
+                  <Wrench className="w-3.5 h-3.5 text-[var(--primary)]" />
+                  <span className="font-semibold text-[var(--foreground)] uppercase tracking-wider text-[11px]">
+                    Bancada de Reparo • Wesley Cell
                   </span>
                 </div>
-                <span className="text-[11px] font-mono text-[var(--foreground-dim)]">
-                  ESD-SAFE // REPAIR
+                <span className="text-[10px] font-mono text-[var(--foreground-dim)] uppercase">
+                  Zona Leste, SP
                 </span>
               </div>
 
-              {/* Bench Image / Placeholder Display */}
-              <div className="relative aspect-[4/3] bg-[#0b111e] p-6 flex flex-col justify-between overflow-hidden">
-                {/* Visual Technical Grid Pattern - subtle */}
-                <div
-                  className="absolute inset-0 opacity-10 pointer-events-none"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(to right, rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.15) 1px, transparent 1px)",
-                    backgroundSize: "24px 24px",
-                  }}
-                />
-
-                {/* Top Overlay Badges */}
-                <div className="relative z-10 flex flex-wrap gap-2">
-                  <span className="px-2.5 py-1 text-[11px] font-mono bg-[#162032] border border-[var(--border)] text-[var(--foreground-muted)] rounded">
-                    Microssolda & Troca de Peças
-                  </span>
-                  <span className="px-2.5 py-1 text-[11px] font-mono bg-[#162032] border border-[var(--border)] text-[var(--foreground-muted)] rounded">
-                    Ferramental de Precisão
-                  </span>
-                </div>
-
-                {/* Center Content: Realistic Bench Status */}
-                <div className="relative z-10 my-auto py-4 text-center sm:text-left">
-                  <div className="inline-block p-3 rounded-lg bg-[var(--surface-elevated)] border border-[var(--border)] mb-3">
-                    <svg
-                      className="w-10 h-10 text-[var(--primary)] mx-auto sm:mx-0"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    >
-                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-                      <line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="2.5" />
-                      <path d="M9 7h6" />
-                      <path d="M9 11h6" />
-                    </svg>
+              {/* Technical Bench Presentation */}
+              <div className="p-5 sm:p-6 bg-[#0e1422] flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border)]">
+                    <span className="text-xs font-mono text-[var(--primary)] font-semibold">
+                      ESPECIALIDADES DE BANCADA
+                    </span>
+                    <span className="text-[11px] font-mono text-[var(--foreground-muted)]">
+                      R. Inácio Monteiro, 762
+                    </span>
                   </div>
-                  <h3 className="text-sm font-semibold text-[var(--foreground)] tracking-wide">
-                    Espaço reservado: Fotografia da Bancada Física
-                  </h3>
-                  <p className="text-xs text-[var(--foreground-muted)] mt-1 max-w-sm">
-                    Exibição da estação de trabalho, microscópio e ferramental real da loja.
-                    Substituível pelo arquivo fotográfico do estabelecimento.
-                  </p>
+
+                  <ul className="space-y-2.5 text-xs sm:text-sm text-[var(--foreground)]">
+                    <li className="flex items-start gap-2.5">
+                      <span className="font-mono text-[var(--primary)] text-xs mt-0.5">01</span>
+                      <div>
+                        <strong>Telas e Displays:</strong> iPhone, Samsung, Moto, Xiaomi
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="font-mono text-[var(--primary)] text-xs mt-0.5">02</span>
+                      <div>
+                        <strong>Baterias e Conectores:</strong> Autonomia e recarga restabelecidas
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="font-mono text-[var(--primary)] text-xs mt-0.5">03</span>
+                      <div>
+                        <strong>Placas e Microssolda:</strong> Recuperação de circuitos lógicos
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="font-mono text-[var(--primary)] text-xs mt-0.5">04</span>
+                      <div>
+                        <strong>iPhone Especializado:</strong> Tampa traseira de vidro e Face ID
+                      </div>
+                    </li>
+                  </ul>
                 </div>
 
-                {/* Bottom specs summary */}
-                <div className="relative z-10 pt-3 border-t border-[var(--border)] flex items-center justify-between text-[11px] text-[var(--foreground-muted)]">
-                  <span>Apple • Samsung • Motorola • Xiaomi</span>
-                  <span className="text-[var(--success)] font-medium">Balanço e testes rigorosos</span>
+                <div className="mt-6 pt-4 border-t border-[var(--border)] flex items-center justify-between">
+                  <div className="text-[11px] text-[var(--foreground-muted)]">
+                    Atendimento presencial ou pelo WhatsApp
+                  </div>
+                  <a
+                    href={getWhatsAppUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-semibold text-[var(--primary)] hover:text-white transition-colors"
+                  >
+                    Consultar agora →
+                  </a>
                 </div>
               </div>
             </div>

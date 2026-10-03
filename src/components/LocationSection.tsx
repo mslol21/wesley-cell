@@ -1,137 +1,138 @@
 import React from "react";
-import { MapPin, Clock, Phone, Navigation, MessageSquare, Car } from "lucide-react";
+import { MapPin, Navigation, Clock, Phone, MessageSquare, ExternalLink } from "lucide-react";
 import { SITE_CONFIG, getWhatsAppUrl } from "@/config/site";
 import { SectionHeader } from "./ui/SectionHeader";
 import { Button } from "./ui/Button";
 
 export function LocationSection() {
   return (
-    <section id="localizacao" className="py-14 md:py-24 border-b border-[var(--border)] scroll-mt-20">
+    <section id="localizacao" className="py-14 sm:py-20 border-b border-[var(--border)] scroll-mt-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          label="06 // Localização e Balcão"
-          title="Onde Estamos e Como Chegar"
-          description="Atendimento presencial no centro. Traga seu aparelho diretamente para a bancada técnica."
+          label="Onde Estamos"
+          title="Loja física na Zona Leste de São Paulo"
+          description="Venha até a Wesley Cell para uma análise presencial ou tire suas dúvidas antes de sair de casa."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Dominant Map Container */}
-          <div className="lg:col-span-7 rounded-[var(--radius-md)] border border-[var(--border-strong)] bg-[var(--surface)] overflow-hidden min-h-[340px] sm:min-h-[420px] flex flex-col justify-between relative shadow-md">
-            {/* Visual map preview / embed */}
-            <div className="relative w-full flex-1 bg-[#0b101c] overflow-hidden flex items-center justify-center">
-              {/* Map grid aesthetic */}
-              <div
-                className="absolute inset-0 opacity-15"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(#3b82f6 1px, transparent 1px), radial-gradient(#3b82f6 1px, #0b101c 1px)",
-                  backgroundSize: "24px 24px",
-                }}
-              />
-
-              {/* Center Map Pin Graphic */}
-              <div className="relative z-10 text-center p-6 max-w-md">
-                <div className="w-14 h-14 mx-auto rounded-full bg-[var(--primary)] text-white flex items-center justify-center shadow-lg mb-3">
-                  <MapPin className="w-7 h-7" />
-                </div>
-                <h3 className="text-lg font-bold text-white tracking-tight">
-                  Wesley Cell — Assistência Técnica
+          {/* Left Column: Clear Location & Contact Cards */}
+          <div className="lg:col-span-6 flex flex-col justify-between space-y-5">
+            <div className="rounded-[var(--radius-md)] border border-[var(--border-strong)] bg-[var(--surface)] p-6 space-y-5">
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-wider text-[var(--primary)] block mb-1">
+                  Endereço Oficial
+                </span>
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--foreground)] tracking-tight">
+                  {SITE_CONFIG.address.street}
                 </h3>
-                <p className="text-xs text-[var(--foreground-muted)] mt-1">
-                  {SITE_CONFIG.address.street} • {SITE_CONFIG.address.city}
+                <p className="text-sm text-[var(--foreground-muted)] mt-1">
+                  {SITE_CONFIG.address.region} — {SITE_CONFIG.address.city}
                 </p>
-                <p className="text-[11px] text-[var(--primary)] mt-1 font-mono">
-                  {SITE_CONFIG.address.reference}
-                </p>
-
-                <div className="mt-5 flex justify-center gap-3">
+                <div className="mt-4 flex flex-wrap gap-2.5">
                   <a
                     href={SITE_CONFIG.address.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Button variant="primary" size="sm">
+                    <Button variant="primary" size="md" className="font-semibold text-xs">
                       <Navigation className="w-3.5 h-3.5 mr-1.5" />
-                      Traçar rota no Maps
+                      COMO CHEGAR (GOOGLE MAPS)
+                    </Button>
+                  </a>
+                  <a
+                    href={getWhatsAppUrl("Olá! Gostaria de confirmar o endereço da Wesley Cell.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="whatsapp" size="md" className="font-semibold text-xs">
+                      <MessageSquare className="w-3.5 h-3.5 mr-1.5" />
+                      Falar no WhatsApp
                     </Button>
                   </a>
                 </div>
               </div>
-            </div>
 
-            {/* Map Bottom Bar */}
-            <div className="px-5 py-3.5 border-t border-[var(--border)] bg-[var(--surface-elevated)] flex flex-col sm:flex-row items-center justify-between text-xs text-[var(--foreground-muted)] gap-2">
-              <span className="flex items-center gap-1.5">
-                <Car className="w-3.5 h-3.5 text-[var(--primary)]" />
-                <span>Estacionamento rápido na rua e ponto de ônibus a 50m</span>
-              </span>
-              <span className="font-mono text-[11px] text-[var(--foreground-dim)]">
-                CEP: {SITE_CONFIG.address.cep}
-              </span>
-            </div>
-          </div>
-
-          {/* Details & Hours Info Card */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
-            <div className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface)] p-6 space-y-5">
-              <div>
-                <h3 className="text-base font-bold text-[var(--foreground)] tracking-tight mb-3 flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-[var(--primary)]" />
-                  <span>Horários de Funcionamento</span>
-                </h3>
-                <div className="divide-y divide-[var(--border)] text-xs sm:text-sm">
+              <div className="pt-4 border-t border-[var(--border)]">
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)] mb-2 flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-[var(--primary)]" />
+                  <span>Horários de Atendimento no Balcão</span>
+                </h4>
+                <div className="space-y-1.5 text-xs text-[var(--foreground-muted)]">
                   {SITE_CONFIG.hours.map((h, i) => (
-                    <div key={i} className="py-2.5 flex justify-between items-center">
-                      <span className="text-[var(--foreground-muted)]">{h.days}</span>
-                      <span className="font-mono font-medium text-[var(--foreground)]">{h.time}</span>
+                    <div key={i} className="flex justify-between py-1 border-b border-[var(--border)] last:border-none">
+                      <span>{h.days}</span>
+                      <strong className="text-[var(--foreground)] font-mono">{h.time}</strong>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[var(--border)]">
-                <h3 className="text-base font-bold text-[var(--foreground)] tracking-tight mb-2 flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[var(--primary)]" />
-                  <span>Endereço Completo</span>
-                </h3>
-                <p className="text-xs sm:text-sm text-[var(--foreground-muted)] leading-relaxed">
-                  {SITE_CONFIG.address.street}
-                  <br />
-                  {SITE_CONFIG.address.city} — CEP: {SITE_CONFIG.address.cep}
-                  <br />
-                  <span className="text-xs text-[var(--foreground-dim)] mt-1 block">
-                    Ponto de referência: {SITE_CONFIG.address.reference}
-                  </span>
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-[var(--border)]">
-                <h3 className="text-base font-bold text-[var(--foreground)] tracking-tight mb-2 flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-[var(--primary)]" />
-                  <span>Canais de Atendimento</span>
-                </h3>
-                <p className="text-xs text-[var(--foreground-muted)] mb-3">
-                  Tire dúvidas sobre prazos e disponibilidade de peças antes de vir à loja:
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="pt-4 border-t border-[var(--border)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div>
+                  <span className="text-[var(--foreground-dim)] block">Telefone e WhatsApp:</span>
+                  <a href={`tel:${SITE_CONFIG.phoneRaw}`} className="text-[var(--foreground)] font-bold hover:text-[var(--primary)]">
+                    {SITE_CONFIG.phoneDisplay}
+                  </a>
+                </div>
+                <div>
+                  <span className="text-[var(--foreground-dim)] block">Instagram Oficial:</span>
                   <a
-                    href={getWhatsAppUrl("Olá! Gostaria de confirmar se estão abertos e tirar uma dúvida.")}
+                    href={SITE_CONFIG.instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="text-[var(--primary)] font-semibold hover:underline inline-flex items-center gap-1"
                   >
-                    <Button variant="whatsapp" size="sm" className="w-full justify-center text-xs">
-                      <MessageSquare className="w-3.5 h-3.5 mr-1.5" />
-                      WhatsApp
-                    </Button>
-                  </a>
-                  <a href={`tel:${SITE_CONFIG.phoneRaw}`}>
-                    <Button variant="secondary" size="sm" className="w-full justify-center text-xs">
-                      <Phone className="w-3.5 h-3.5 mr-1.5" />
-                      Ligar no balcão
-                    </Button>
+                    {SITE_CONFIG.instagramHandle}
+                    <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Right Column: Visual Dark Map Frame */}
+          <div className="lg:col-span-6 rounded-[var(--radius-md)] border border-[var(--border-strong)] bg-[var(--surface)] overflow-hidden flex flex-col justify-between min-h-[320px]">
+            {/* Visual map preview header */}
+            <div className="px-4 py-3 bg-[var(--surface-elevated)] border-b border-[var(--border)] flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-[var(--primary)]" />
+                <span className="font-semibold text-[var(--foreground)]">
+                  Rua Inácio Monteiro, 762
+                </span>
+              </div>
+              <span className="text-[11px] font-mono text-[var(--foreground-dim)]">
+                Zona Leste • SP
+              </span>
+            </div>
+
+            {/* Map Canvas Graphic */}
+            <div className="relative flex-1 bg-[#090e18] p-6 flex flex-col items-center justify-center text-center">
+              <div className="w-12 h-12 rounded-full bg-[var(--primary)]/15 border border-[var(--primary)] text-[var(--primary)] flex items-center justify-center mb-3">
+                <Navigation className="w-6 h-6" />
+              </div>
+              <h4 className="text-base font-bold text-white">
+                Ponto de Atendimento Wesley Cell
+              </h4>
+              <p className="text-xs text-[var(--foreground-muted)] max-w-sm mt-1">
+                Fácil localização na principal via da região da Cidade Tiradentes / Guaianases na Zona Leste.
+              </p>
+
+              <div className="mt-5">
+                <a
+                  href={SITE_CONFIG.address.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="secondary" size="sm" className="text-xs">
+                    <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                    Abrir no aplicativo de mapas
+                  </Button>
+                </a>
+              </div>
+            </div>
+
+            <div className="px-4 py-2.5 bg-[var(--surface-elevated)] border-t border-[var(--border)] text-[11px] text-[var(--foreground-dim)] text-center sm:text-left">
+              Traga seu celular diretamente na loja para avaliação física da bancada.
             </div>
           </div>
         </div>

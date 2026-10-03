@@ -13,29 +13,30 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#090d16",
+  themeColor: "#0b0f19",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  title: "Wesley Cell | Assistência Técnica Especializada em Smartphones",
+  title: "Wesley Cell | Assistência Técnica de Celulares e Tablets • Zona Leste",
   description:
-    "Conserto ágil e transparente para o seu celular. Troca de telas, baterias, conectores e reparos em placa com garantia legal de 90 dias e atendimento direto com o técnico.",
+    "Conserto de celulares e tablets na Rua Inácio Monteiro, 762, Zona Leste de São Paulo. Troca de tela, bateria, conector, placa e tampa de iPhone. Peça seu orçamento pelo WhatsApp: (11) 94889-6283.",
   keywords: [
-    "assistência técnica celular",
-    "troca de tela",
-    "troca de bateria",
-    "conserto de smartphone",
-    "reparo de placa celular",
     "Wesley Cell",
+    "assistência técnica celular zona leste",
+    "conserto celular inacio monteiro",
+    "troca de tela celular",
+    "troca de bateria",
+    "reparo de placa celular",
+    "conserto de tablet sp",
   ],
   authors: [{ name: "Wesley Cell" }],
   openGraph: {
-    title: "Wesley Cell | Assistência Técnica Especializada em Smartphones",
+    title: "Wesley Cell | Assistência Técnica de Celulares e Tablets • Zona Leste",
     description:
-      "Conserto ágil e transparente para o seu celular. Peças de alta qualidade, garantia de 90 dias e atendimento direto no balcão e WhatsApp.",
+      "Conserto de celulares e tablets na Rua Inácio Monteiro, 762, Zona Leste de São Paulo. Orçamento rápido pelo WhatsApp (11) 94889-6283.",
     type: "website",
     locale: "pt_BR",
   },
@@ -51,7 +52,7 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#090d16] text-[#f8fafc] font-sans">
+      <body className="min-h-full flex flex-col bg-[#0b0f19] text-[#f1f5f9] font-sans">
         {children}
       </body>
     </html>
