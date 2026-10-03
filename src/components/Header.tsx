@@ -81,13 +81,13 @@ export function Header() {
             href="#"
             className="flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-[var(--border-focus)] rounded-sm group"
           >
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 shrink-0">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden shrink-0 border border-[var(--primary)]/40 shadow-sm">
               <Image
                 src="/logo-circle.png"
                 alt="Wesley Cell Logo"
                 fill
                 sizes="(max-width: 640px) 40px, 48px"
-                className="object-contain"
+                className="object-cover rounded-full"
                 priority
               />
             </div>
@@ -176,13 +176,13 @@ export function Header() {
         >
           <div className="flex items-center justify-between px-4 h-16 border-b border-[var(--border)]">
             <div className="flex items-center gap-2.5">
-              <div className="relative w-8 h-8 shrink-0">
+              <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0 border border-[var(--primary)]/40">
                 <Image
                   src="/logo-circle.png"
                   alt="Wesley Cell Logo"
                   fill
                   sizes="32px"
-                  className="object-contain"
+                  className="object-cover rounded-full"
                 />
               </div>
               <span className="font-bold text-base tracking-tight text-white">WESLEY CELL</span>

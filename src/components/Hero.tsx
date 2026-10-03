@@ -106,13 +106,13 @@ export function Hero() {
 
               {/* Center visual: Official circular logo presentation */}
               <div className="p-6 sm:p-8 flex flex-col items-center text-center">
-                <div className="relative w-36 h-36 sm:w-44 sm:h-44 mx-auto mb-4 drop-shadow-[0_12px_28px_rgba(37,99,235,0.3)]">
+                <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden mx-auto mb-4 border border-[var(--primary)]/40 shadow-xl bg-[#061129]">
                   <Image
                     src="/logo-circle.png"
                     alt="Wesley Cell Logotipo"
                     fill
                     sizes="(max-width: 640px) 144px, 176px"
-                    className="object-contain"
+                    className="object-cover rounded-full"
                     priority
                   />
                 </div>
